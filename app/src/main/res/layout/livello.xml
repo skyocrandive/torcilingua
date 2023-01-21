@@ -52,6 +52,12 @@
             android:layout_height="wrap_content"
             android:text="home" />
 
+        <TextView
+            android:id="@+id/accuracy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accuracy" />
+
     </LinearLayout>
 
 

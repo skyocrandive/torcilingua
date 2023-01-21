@@ -31,6 +31,7 @@ public class LivelloActivity extends AppCompatActivity {
     private ImageView micButton;
     private TextView sciogliText;
     private Button homeButton;
+    private TextView accuracyText;
 
     String testoSciogli = "Trentatré Trentini entrarono a Trento tutti e trentatré trotterellando";
 
@@ -40,12 +41,12 @@ public class LivelloActivity extends AppCompatActivity {
         int corrette = 0;
         int i = 0;
         for (i = 0; i< paroleTesto.length && i<paroleParlato.length; i++){
-            if(paroleTesto[i]==paroleParlato[i]){
+            if(paroleTesto[i].equalsIgnoreCase(paroleParlato[i])){
                 corrette++;
             }
         }
         float dividendo = i < paroleTesto.length ? paroleTesto.length : paroleParlato.length;
-        return corrette/dividendo;
+        return ((float)corrette/dividendo)*100;
     }
 
     @Override
@@ -61,6 +62,7 @@ public class LivelloActivity extends AppCompatActivity {
         editText = findViewById(R.id.text);
         micButton = findViewById(R.id.button);
         homeButton = findViewById(R.id.goBack);
+        accuracyText = findViewById(R.id.accuracy);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
         final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -107,6 +109,7 @@ public class LivelloActivity extends AppCompatActivity {
                 String res = data.get(0);
                 float accuracy = precisione(testoSciogli, res);
                 editText.setText(res);
+                accuracyText.setText("Accuracy: "+ accuracy+"%");
             }
 
             @Override

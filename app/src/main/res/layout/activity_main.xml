@@ -20,7 +20,7 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/button"
             android:hint="Premi per ascoltare"
-            android:padding="10dp" />
+            android:padding="15dp" />
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"

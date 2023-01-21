@@ -117,7 +117,10 @@ public class MainActivity extends AppCompatActivity {
         livButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                setContentView(R.layout.livello);
+                Intent intent = new Intent(MainActivity.this,
+                        LivelloActivity.class);
+                intent.putExtra("livello",1);
+                startActivity(intent);
                 return false;
             }
         });

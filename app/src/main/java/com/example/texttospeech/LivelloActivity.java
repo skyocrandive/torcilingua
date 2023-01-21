@@ -10,6 +10,7 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,17 +24,19 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Livello extends AppCompatActivity {
+public class LivelloActivity extends AppCompatActivity {
     public static final Integer RecordAudioRequestCode = 1;
     private SpeechRecognizer speechRecognizer;
     private EditText editText;
     private ImageView micButton;
     private TextView sciogliText;
+    private Button homeButton;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.livello);
+        sciogliText = findViewById(R.id.scioglilingua);
         sciogliText.setText("Trentatré Trentini entrarono a Trento, tutti e trentatré trotterellando");
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             checkPermission();
@@ -41,11 +44,12 @@ public class Livello extends AppCompatActivity {
 
         editText = findViewById(R.id.text);
         micButton = findViewById(R.id.button);
+        homeButton = findViewById(R.id.goBack);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
         final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault()); //it sets language recognition to the language of the device
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ITALY.toString()); //it sets language recognition to the language of the device
 
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
 
@@ -109,6 +113,15 @@ public class Livello extends AppCompatActivity {
                     micButton.setImageResource(R.drawable.ic_mic_black_24dp);
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
+                return false;
+            }
+        });
+
+        homeButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Intent intent = new Intent(LivelloActivity.this,MainActivity.class);
+                startActivity(intent);
                 return false;
             }
         });

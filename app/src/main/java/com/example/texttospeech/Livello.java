@@ -1,10 +1,5 @@
 package com.example.texttospeech;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,33 +10,37 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class Livello extends AppCompatActivity {
     public static final Integer RecordAudioRequestCode = 1;
     private SpeechRecognizer speechRecognizer;
     private EditText editText;
     private ImageView micButton;
-    private Button livButton;
+    private TextView sciogliText;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+        setContentView(R.layout.livello);
+        sciogliText.setText("Trentatré Trentini entrarono a Trento, tutti e trentatré trotterellando");
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             checkPermission();
         }
 
         editText = findViewById(R.id.text);
         micButton = findViewById(R.id.button);
-        livButton = findViewById(R.id.toLivello);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
         final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResults(Bundle bundle) {
                 micButton.setImageResource(R.drawable.ic_mic_black_off);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                    editText.setText(data.get(0));
+                editText.setText(data.get(0));
             }
 
             @Override
@@ -114,13 +113,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        livButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                setContentView(R.layout.livello);
-                return false;
-            }
-        });
     }
 
     @Override

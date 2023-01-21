@@ -32,12 +32,28 @@ public class LivelloActivity extends AppCompatActivity {
     private TextView sciogliText;
     private Button homeButton;
 
+    String testoSciogli = "Trentatré Trentini entrarono a Trento tutti e trentatré trotterellando";
+
+    float precisione(String testo, String parlato){
+        String[] paroleTesto = testo.split(" ");
+        String[] paroleParlato = parlato.split(" ");
+        int corrette = 0;
+        int i = 0;
+        for (i = 0; i< paroleTesto.length && i<paroleParlato.length; i++){
+            if(paroleTesto[i]==paroleParlato[i]){
+                corrette++;
+            }
+        }
+        float dividendo = i < paroleTesto.length ? paroleTesto.length : paroleParlato.length;
+        return corrette/dividendo;
+    }
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.livello);
         sciogliText = findViewById(R.id.scioglilingua);
-        sciogliText.setText("Trentatré Trentini entrarono a Trento, tutti e trentatré trotterellando");
+        sciogliText.setText(testoSciogli);
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             checkPermission();
         }
@@ -88,7 +104,9 @@ public class LivelloActivity extends AppCompatActivity {
             public void onResults(Bundle bundle) {
                 micButton.setImageResource(R.drawable.ic_mic_black_off);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                editText.setText(data.get(0));
+                String res = data.get(0);
+                float accuracy = precisione(testoSciogli, res);
+                editText.setText(res);
             }
 
             @Override

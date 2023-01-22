@@ -21,15 +21,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     public static final Integer RecordAudioRequestCode = 1;
-    private SpeechRecognizer speechRecognizer;
-    private EditText editText;
-    private ImageView micButton;
-    private Button livButton;
+    private static final Integer NumLivelli = 5;
+    private Chip[] chips = new Chip[NumLivelli];
+    private TextView[] completeTesti = new TextView[NumLivelli];
+    private CircularProgressIndicator[] barProgressi = new CircularProgressIndicator[NumLivelli];
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -39,97 +42,45 @@ public class MainActivity extends AppCompatActivity {
             checkPermission();
         }
 
-        editText = findViewById(R.id.text);
-        micButton = findViewById(R.id.button);
-        livButton = findViewById(R.id.toLivello);
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        chips[0] = findViewById(R.id.lev1);
+        completeTesti[0] = findViewById(R.id.compl1);
+        barProgressi[0] = findViewById(R.id.prog1);
 
-        final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.US); //it sets language recognition to the language of the device
+        chips[1] = findViewById(R.id.lev2);
+        completeTesti[1] = findViewById(R.id.compl2);
+        barProgressi[1] = findViewById(R.id.prog2);
 
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+        chips[2] = findViewById(R.id.lev3);
+        completeTesti[2] = findViewById(R.id.compl3);
+        barProgressi[2] = findViewById(R.id.prog3);
 
-            @Override
-            public void onReadyForSpeech(Bundle bundle) {
+        chips[3] = findViewById(R.id.lev4);
+        completeTesti[3] = findViewById(R.id.compl4);
+        barProgressi[3] = findViewById(R.id.prog4);
 
-            }
+        chips[4] = findViewById(R.id.lev5);
+        completeTesti[4] = findViewById(R.id.compl5);
+        barProgressi[4] = findViewById(R.id.prog5);
 
-            @Override
-            public void onBeginningOfSpeech() {
-                editText.setText("");
-                editText.setHint("Sto ascoltando...");
-            }
-
-            @Override
-            public void onRmsChanged(float v) {
-
-            }
-
-            @Override
-            public void onBufferReceived(byte[] bytes) {
-
-            }
-
-            @Override
-            public void onEndOfSpeech() {
-
-            }
-
-            @Override
-            public void onError(int i) {
-
-            }
-
-            @Override
-            public void onResults(Bundle bundle) {
-                micButton.setImageResource(R.drawable.ic_mic_black_off);
-                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                    editText.setText(data.get(0));
-            }
-
-            @Override
-            public void onPartialResults(Bundle bundle) {
-
-            }
-
-            @Override
-            public void onEvent(int i, Bundle bundle) {
-
-            }
-
-        });
-
-        micButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    speechRecognizer.stopListening();
+        for (int i = 0; i<NumLivelli; i++){
+            int finalI = i;
+            chips[i].setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    Intent intent = new Intent(MainActivity.this,
+                            LivelloActivity.class);
+                    intent.putExtra("livello",finalI);
+                    startActivity(intent);
+                    return false;
                 }
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    micButton.setImageResource(R.drawable.ic_mic_black_24dp);
-                    speechRecognizer.startListening(speechRecognizerIntent);
-                }
-                return false;
-            }
-        });
+            });
+        }
 
-        livButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Intent intent = new Intent(MainActivity.this,
-                        LivelloActivity.class);
-                intent.putExtra("livello",1);
-                startActivity(intent);
-                return false;
-            }
-        });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        speechRecognizer.destroy();
     }
 
     private void checkPermission() {

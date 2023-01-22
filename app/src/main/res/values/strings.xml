@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SpeechToText</string>
+    <string name="torcilingua">TorciLingua</string>
+    <string name="livello_1">Livello 1</string>
 </resources>

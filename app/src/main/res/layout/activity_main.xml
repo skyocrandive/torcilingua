@@ -1,51 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/progresso"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#073B3A"
     tools:context=".MainActivity">
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/text"
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@id/button"
-            android:hint="Premi per ascoltare"
-            android:padding="15dp" />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#F9F8FA"
-            android:paddingRight="10dp"
-            android:src="@drawable/ic_mic_black_off"
-            android:layout_alignParentRight="true"
-            android:id="@+id/button"/>
-    </RelativeLayout>
+            android:layout_height="58dp"
+            android:background="#76D8AE"
+            android:drawableLeft="@mipmap/torcilingua_logo"
+            android:freezesText="true"
+            android:gravity="center"
+            android:text="@string/torcilingua"
+            android:textColor="#000000"
+            android:textSize="34sp" />
 
-    <Button
-        android:id="@+id/toLivello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="164dp"
-        android:layout_marginLeft="164dp"
-        android:layout_marginTop="290dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginRight="159dp"
-        android:text="Livello" />
+        <FrameLayout
+            android:id="@+id/frameLv1"
+            android:layout_width="374dp"
+            android:layout_height="82dp"
+            android:layout_gravity="center">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lev1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/livello_1"
+                android:textAllCaps="true"
+                android:textIsSelectable="false"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:chipBackgroundColor="#8BC34A"
+                app:chipStartPadding="50dp" />
+
+            <TextView
+                android:id="@+id/compl1"
+                android:layout_width="232dp"
+                android:layout_height="72dp"
+                android:gravity="bottom"
+                android:paddingLeft="60dp"
+                android:text="completato"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/prog1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:paddingRight="10dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLv2"
+            android:layout_width="374dp"
+            android:layout_height="82dp"
+            android:layout_gravity="center">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lev2"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:text="livello 2"
+                android:textAllCaps="true"
+                android:textIsSelectable="false"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:chipBackgroundColor="#FFE8A3"
+                app:chipStartPadding="50dp" />
+
+            <TextView
+                android:id="@+id/compl2"
+                android:layout_width="232dp"
+                android:layout_height="72dp"
+                android:gravity="bottom"
+                android:paddingLeft="60dp"
+                android:text="completato"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/prog2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:paddingRight="10dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLv3"
+            android:layout_width="374dp"
+            android:layout_height="82dp"
+            android:layout_gravity="center">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lev3"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:text="livello 3"
+                android:textAllCaps="true"
+                android:textIsSelectable="false"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:chipBackgroundColor="#FCD19C"
+                app:chipStartPadding="50dp" />
+
+            <TextView
+                android:id="@+id/compl3"
+                android:layout_width="232dp"
+                android:layout_height="72dp"
+                android:gravity="bottom"
+                android:paddingLeft="60dp"
+                android:text="completato"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/prog3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:paddingRight="10dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLv4"
+            android:layout_width="374dp"
+            android:layout_height="82dp"
+            android:layout_gravity="center">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lev4"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:text="livello 4"
+                android:textAllCaps="true"
+                android:textIsSelectable="false"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:chipBackgroundColor="#FFA629"
+                app:chipStartPadding="50dp" />
+
+            <TextView
+                android:id="@+id/compl4"
+                android:layout_width="232dp"
+                android:layout_height="72dp"
+                android:gravity="bottom"
+                android:paddingLeft="60dp"
+                android:text="completato"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/prog4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:paddingRight="10dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLv5"
+            android:layout_width="374dp"
+            android:layout_height="82dp"
+            android:layout_gravity="center">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lev5"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:text="livello 5"
+                android:textAllCaps="true"
+                android:textIsSelectable="false"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:chipBackgroundColor="#F44336"
+                app:chipStartPadding="50dp" />
+
+            <TextView
+                android:id="@+id/compl5"
+                android:layout_width="232dp"
+                android:layout_height="72dp"
+                android:gravity="bottom"
+                android:paddingLeft="60dp"
+                android:text="completato"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/prog5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:paddingRight="10dp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 
 </RelativeLayout>

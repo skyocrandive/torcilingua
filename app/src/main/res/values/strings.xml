@@ -2,4 +2,9 @@
     <string name="app_name">SpeechToText</string>
     <string name="torcilingua">TorciLingua</string>
     <string name="livello_1">Livello 1</string>
+    <string name="completato">completato</string>
+    <string name="livello_2">livello 2</string>
+    <string name="livello_5">livello 5</string>
+    <string name="livello_4">livello 4</string>
+    <string name="livello_3">livello 3</string>
 </resources>

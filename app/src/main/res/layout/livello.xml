@@ -1,64 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#073B3A"
+    android:foregroundGravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="231dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="267dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/scioglilingua"
-            android:layout_width="match_parent"
-            android:layout_height="71dp"
-            android:text="prova"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-
-            <EditText
-                android:id="@+id/text"
-                android:layout_width="332dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:hint="Premi per ascoltare"
-                android:padding="15dp" />
-
-            <ImageView
-                android:id="@+id/button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:backgroundTint="#F9F8FA"
-                android:paddingRight="10dp"
-                android:src="@drawable/ic_mic_black_off" />
-
-        </LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/goBack"
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="home" />
+            android:text="@string/home"
+            android:textColor="#000000"
+            app:backgroundTint="#5EB1BF" />
 
-        <TextView
-            android:id="@+id/accuracy"
-            android:layout_width="match_parent"
+        <Space
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:text="Accuracy" />
+            android:layout_weight="1" />
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/levProg"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:progress="0"
+            app:indicatorColor="#AFF4C6"
+            app:trackThickness="20dp" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/scioglilingua"
+        android:layout_width="392dp"
+        android:layout_height="177dp"
+        android:background="@drawable/rounded_corner"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/mic"
+        android:layout_width="157dp"
+        android:layout_height="139dp"
+        android:foreground="@mipmap/mic_black"
+        app:chipBackgroundColor="#FFFFFF" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/accuracy"
+        android:layout_width="65dp"
+        android:layout_height="62dp"
+        android:layout_gravity="center|end"
+        app:indicatorColor="#5EB1BF"
+        app:trackThickness="20dp" />
+
+    <TextView
+        android:id="@+id/parlato"
+        android:layout_width="392dp"
+        android:layout_height="177dp"
+        android:background="@drawable/rounded_corner"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/nextBut"
+        android:layout_width="350dp"
+        android:layout_height="79dp"
+        android:gravity="center"
+        android:text="@string/prossimo"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:chipBackgroundColor="#5EB1BF" />
+
+
+</LinearLayout>

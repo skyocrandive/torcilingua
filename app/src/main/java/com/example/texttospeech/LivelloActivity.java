@@ -27,7 +27,7 @@ import java.util.Locale;
 public class LivelloActivity extends AppCompatActivity {
     public static final Integer RecordAudioRequestCode = 1;
     private SpeechRecognizer speechRecognizer;
-    private EditText editText;
+    private TextView editText;
     private ImageView micButton;
     private TextView sciogliText;
     private Button homeButton;
@@ -59,9 +59,9 @@ public class LivelloActivity extends AppCompatActivity {
             checkPermission();
         }
 
-        editText = findViewById(R.id.text);
-        micButton = findViewById(R.id.button);
-        homeButton = findViewById(R.id.goBack);
+        editText = findViewById(R.id.parlato);
+        micButton = findViewById(R.id.mic);
+        homeButton = findViewById(R.id.nextBut);
         accuracyText = findViewById(R.id.accuracy);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 

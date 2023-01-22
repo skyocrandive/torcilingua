@@ -20,7 +20,6 @@
         android:text="@string/torcilingua"
         android:textColor="#000000"
         android:textSize="34sp"
-        app:drawableLeftCompat="@mipmap/torcilingua_logo"
         app:drawableStartCompat="@mipmap/torcilingua_logo" />
 
     <FrameLayout
@@ -63,7 +62,9 @@
             android:paddingStart="0dp"
             android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            app:indicatorColor="#073B3A"
+            app:trackThickness="20dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -106,7 +107,9 @@
             android:paddingStart="0dp"
             android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            app:indicatorColor="#073B3A"
+            app:trackThickness="20dp"/>
     </FrameLayout>
 
     <FrameLayout
@@ -149,7 +152,9 @@
             android:paddingStart="0dp"
             android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            app:indicatorColor="#073B3A"
+            app:trackThickness="20dp"/>
     </FrameLayout>
 
     <FrameLayout
@@ -192,7 +197,9 @@
             android:paddingStart="0dp"
             android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            app:indicatorColor="#073B3A"
+            app:trackThickness="20dp"/>
     </FrameLayout>
 
     <FrameLayout
@@ -236,7 +243,9 @@
             android:paddingStart="0dp"
             android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            app:indicatorColor="#073B3A"
+            app:trackThickness="20dp"/>
 
     </FrameLayout>
 

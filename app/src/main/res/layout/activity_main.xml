@@ -63,8 +63,24 @@
             android:paddingLeft="0dp"
             android:paddingEnd="10dp"
             android:paddingRight="10dp"
+            android:progress="0"
             app:indicatorColor="#073B3A"
             app:trackThickness="20dp" />
+
+        <TextView
+            android:id="@+id/progText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:paddingRight="14dp"
+            android:text="@string/_0"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingEnd="14dp"
+            android:paddingStart="0dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -109,7 +125,23 @@
             android:paddingEnd="10dp"
             android:paddingRight="10dp"
             app:indicatorColor="#073B3A"
-            app:trackThickness="20dp"/>
+            app:trackThickness="20dp" />
+
+        <TextView
+            android:id="@+id/progText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:paddingRight="14dp"
+            android:text="@string/_0"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingEnd="14dp"
+            android:paddingStart="0dp" />
+
     </FrameLayout>
 
     <FrameLayout
@@ -155,6 +187,21 @@
             android:paddingRight="10dp"
             app:indicatorColor="#073B3A"
             app:trackThickness="20dp"/>
+
+        <TextView
+            android:id="@+id/progText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:paddingRight="14dp"
+            android:text="@string/_0"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingEnd="14dp"
+            android:paddingStart="0dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -200,6 +247,21 @@
             android:paddingRight="10dp"
             app:indicatorColor="#073B3A"
             app:trackThickness="20dp"/>
+
+        <TextView
+            android:id="@+id/progText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:paddingRight="14dp"
+            android:text="@string/_0"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingEnd="14dp"
+            android:paddingStart="0dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -232,8 +294,22 @@
             android:text="@string/completato"
             android:textAllCaps="true"
             android:textStyle="bold"
-            android:visibility="invisible"
-            tools:visibility="visible" />
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/progText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:paddingRight="14dp"
+            android:text="@string/_0"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingEnd="14dp"
+            android:paddingStart="0dp" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/prog5"

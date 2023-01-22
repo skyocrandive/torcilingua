@@ -69,13 +69,30 @@
         android:foreground="@mipmap/mic_black"
         app:chipBackgroundColor="#FFFFFF" />
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/accuracy"
-        android:layout_width="65dp"
-        android:layout_height="62dp"
-        android:layout_gravity="center|end"
-        app:indicatorColor="#5EB1BF"
-        app:trackThickness="20dp" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/accuracy"
+            android:layout_width="65dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center|end"
+            android:progress="0"
+            app:indicatorColor="#5EB1BF"
+            app:trackThickness="20dp" />
+
+        <TextView
+            android:id="@+id/accuracyText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#FEFEFE"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/parlato"

@@ -29,8 +29,12 @@ import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView[] completeTesti = new TextView[NumLivelli];
     private CircularProgressIndicator[] barProgressi = new CircularProgressIndicator[NumLivelli];
     private TextView[] percProgs = new TextView[NumLivelli];
+
+    String jsonFileString = Utils.getJsonFromAssets(getApplicationContext(), "scioglilingua.json");
+
+    Gson gson = new Gson();
+    Type listLivelloType = new TypeToken<List<Livello>>() { }.getType();
+
+    List<Livello> livelli = gson.fromJson(jsonFileString, listLivelloType);
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -82,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     //Create Intent
                     Intent intent = new Intent(MainActivity.this, LivelloActivity.class);
                     intent.putExtra("livello",finalI);
+                    intent.putExtra("scioglilingua", livelli.get(finalI).getScioglilingua());
                     //startActivity(intent);
                     startActivityForResult(intent, 1);
                 }

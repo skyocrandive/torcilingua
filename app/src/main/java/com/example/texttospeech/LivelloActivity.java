@@ -29,6 +29,9 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 public class LivelloActivity extends AppCompatActivity {
@@ -71,6 +74,11 @@ public class LivelloActivity extends AppCompatActivity {
         sciogliText.setText(testoSciogli);
         int livello = getIntent().getIntExtra("livello", 1);
 
+        String[] scioglilinguas = getIntent().getStringArrayExtra("scioglilingua");
+        List testi = new ArrayList(Arrays.asList(scioglilinguas));
+        Collections.shuffle(testi);
+
+        testoSciogli = (String) testi.get(0);
 
         parlatoText = findViewById(R.id.parlato);
         micButton = findViewById(R.id.mic);

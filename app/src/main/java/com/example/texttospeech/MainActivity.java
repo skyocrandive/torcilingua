@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Chip[] chips = new Chip[NumLivelli];
     private TextView[] completeTesti = new TextView[NumLivelli];
     private CircularProgressIndicator[] barProgressi = new CircularProgressIndicator[NumLivelli];
+    private TextView[] percProgs = new TextView[NumLivelli];
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -51,22 +52,27 @@ public class MainActivity extends AppCompatActivity {
         chips[0] = findViewById(R.id.lev1);
         completeTesti[0] = findViewById(R.id.compl1);
         barProgressi[0] = findViewById(R.id.prog1);
+        percProgs[0] = findViewById(R.id.progText1);
 
         chips[1] = findViewById(R.id.lev2);
         completeTesti[1] = findViewById(R.id.compl2);
         barProgressi[1] = findViewById(R.id.prog2);
+        percProgs[1] = findViewById(R.id.progText2);
 
         chips[2] = findViewById(R.id.lev3);
         completeTesti[2] = findViewById(R.id.compl3);
         barProgressi[2] = findViewById(R.id.prog3);
+        percProgs[2] = findViewById(R.id.progText3);
 
         chips[3] = findViewById(R.id.lev4);
         completeTesti[3] = findViewById(R.id.compl4);
         barProgressi[3] = findViewById(R.id.prog4);
+        percProgs[3] = findViewById(R.id.progText4);
 
         chips[4] = findViewById(R.id.lev5);
         completeTesti[4] = findViewById(R.id.compl5);
         barProgressi[4] = findViewById(R.id.prog5);
+        percProgs[4] = findViewById(R.id.progText5);
 
         for (int i = 0; i<NumLivelli; i++){
             int finalI = i;
@@ -90,9 +96,16 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("IL RISULTATO E STATO RITORNATO reqcode = "+requestCode+" result code = "+resultCode);
         // Checking the result status
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            float totAcc = data.getFloatExtra("totAcc", -1);
-            System.out.println("STAMMI A SENTIRE, ALLORA LO STATO DELLA Accuracy = "+totAcc);
-
+            int totAcc = data.getIntExtra("totAcc", -1);
+            int livello = data.getIntExtra("livello", -1);
+            if(livello>=0 && totAcc>=0){
+                barProgressi[livello].setProgress(totAcc);
+                percProgs[livello].setText(totAcc+"%");
+                if(totAcc==100){
+                    completeTesti[livello].setVisibility(View.VISIBLE);
+                }
+            }
+            //System.out.println("STAMMI A SENTIRE, ALLORA LO STATO DELLA Accuracy = "+totAcc);
         }
     }
 

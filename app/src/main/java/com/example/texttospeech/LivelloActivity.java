@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.chip.Chip;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -39,12 +40,14 @@ public class LivelloActivity extends AppCompatActivity {
     private ImageView micButton;
     private Chip nextButton;
     private TextView accuracyText;
-    private float totAcc = 0;
+    private CircularProgressIndicator ratio;
+    private int totAcc = 0;
+
 
     String testoSciogli = "Trentatré Trentini entrarono a Trento tutti e trentatré trotterellando";
 
 
-    float precisione(String testo, String parlato){
+    int precisione(String testo, String parlato){
         String[] paroleTesto = testo.split(" ");
         String[] paroleParlato = parlato.split(" ");
         int corrette = 0;
@@ -55,7 +58,7 @@ public class LivelloActivity extends AppCompatActivity {
             }
         }
         float dividendo = i < paroleTesto.length ? paroleTesto.length : paroleParlato.length;
-        return ((float)corrette/dividendo)*100;
+        return (int) (100*corrette/dividendo);
     }
 
     @Override
@@ -74,6 +77,7 @@ public class LivelloActivity extends AppCompatActivity {
         homeButton = findViewById(R.id.goHome);
         nextButton = findViewById(R.id.nextBut);
         accuracyText = findViewById(R.id.accuracyText);
+        ratio = findViewById(R.id.accuracy);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
 
@@ -121,10 +125,12 @@ public class LivelloActivity extends AppCompatActivity {
                 micButton.setImageResource(R.mipmap.mic_def);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 String res = data.get(0);
-                float accuracy = precisione(testoSciogli, res);
+                int accuracy = precisione(testoSciogli, res);
                 totAcc =accuracy;
                 parlatoText.setText(res);
                 accuracyText.setText(accuracy+"%");
+                ratio.setProgress(accuracy);
+
             }
 
             @Override

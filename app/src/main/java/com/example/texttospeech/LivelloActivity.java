@@ -70,8 +70,7 @@ public class LivelloActivity extends AppCompatActivity {
         System.out.println("avvio il livello n. "+getIntent().getIntExtra("livello",1));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.livello);
-        sciogliText = findViewById(R.id.scioglilingua);
-        sciogliText.setText(testoSciogli);
+
         int livello = getIntent().getIntExtra("livello", 1);
 
         String[] scioglilinguas = getIntent().getStringArrayExtra("scioglilingua");
@@ -79,6 +78,9 @@ public class LivelloActivity extends AppCompatActivity {
         Collections.shuffle(testi);
 
         testoSciogli = (String) testi.get(0);
+
+        sciogliText = findViewById(R.id.scioglilingua);
+        sciogliText.setText(testoSciogli);
 
         parlatoText = findViewById(R.id.parlato);
         micButton = findViewById(R.id.mic);

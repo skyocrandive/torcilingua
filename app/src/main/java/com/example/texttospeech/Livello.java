@@ -2,11 +2,11 @@ package com.example.texttospeech;
 
 public class Livello {
     private int livello;
-    private String[] scioglilingua;
+    private String[] scioglilinguaTesti;
 
     public Livello(int livello, String[] scioglilingua) {
         this.livello = livello;
-        this.scioglilingua = scioglilingua;
+        this.scioglilinguaTesti = scioglilingua;
     }
 
     public int getLivello() {
@@ -18,10 +18,10 @@ public class Livello {
     }
 
     public String[] getScioglilingua() {
-        return scioglilingua;
+        return scioglilinguaTesti;
     }
 
     public void setScioglilingua(String[] scioglilingua) {
-        this.scioglilingua = scioglilingua;
+        this.scioglilinguaTesti = scioglilingua;
     }
 }

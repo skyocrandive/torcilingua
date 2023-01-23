@@ -45,14 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private CircularProgressIndicator[] barProgressi = new CircularProgressIndicator[NumLivelli];
     private TextView[] percProgs = new TextView[NumLivelli];
 
-    String jsonFileString = Utils.getJsonFromAssets(getApplicationContext(), "scioglilingua.json");
-
-    Gson gson = new Gson();
-    Type listLivelloType = new TypeToken<List<Livello>>() { }.getType();
-
-    List<Livello> livelli = gson.fromJson(jsonFileString, listLivelloType);
-
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             checkPermission();
         }
+
+        String jsonFileString = Utils.getJsonFromAssets(getApplicationContext(), "scioglilingua.json");
+
+        Gson gson = new Gson();
+        Type listLivelloType = new TypeToken<List<Livello>>() { }.getType();
+
+        List<Livello> livelli = gson.fromJson(jsonFileString, listLivelloType);
 
         chips[0] = findViewById(R.id.lev1);
         completeTesti[0] = findViewById(R.id.compl1);

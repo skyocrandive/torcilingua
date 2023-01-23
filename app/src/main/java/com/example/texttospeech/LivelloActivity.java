@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -37,8 +39,10 @@ public class LivelloActivity extends AppCompatActivity {
     private ImageView micButton;
     private Chip nextButton;
     private TextView accuracyText;
+    private float totAcc = 0;
 
     String testoSciogli = "Trentatré Trentini entrarono a Trento tutti e trentatré trotterellando";
+
 
     float precisione(String testo, String parlato){
         String[] paroleTesto = testo.split(" ");
@@ -56,13 +60,14 @@ public class LivelloActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        System.out.println("ciao mondo!!!!");
+        System.out.println("avvio il livello n. "+getIntent().getIntExtra("livello",1));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.livello);
         sciogliText = findViewById(R.id.scioglilingua);
         sciogliText.setText(testoSciogli);
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
-            checkPermission();
-        }
+        int livello = getIntent().getIntExtra("livello", 1);
+
 
         parlatoText = findViewById(R.id.parlato);
         micButton = findViewById(R.id.mic);
@@ -85,6 +90,7 @@ public class LivelloActivity extends AppCompatActivity {
 
             @Override
             public void onBeginningOfSpeech() {
+                micButton.setImageResource(R.mipmap.mic_green);
                 parlatoText.setText("");
                 parlatoText.setHint("Sto ascoltando...");
             }
@@ -106,7 +112,7 @@ public class LivelloActivity extends AppCompatActivity {
 
             @Override
             public void onError(int i) {
-
+                parlatoText.setHint("riprova");
             }
 
             @Override
@@ -116,8 +122,9 @@ public class LivelloActivity extends AppCompatActivity {
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 String res = data.get(0);
                 float accuracy = precisione(testoSciogli, res);
+                totAcc =accuracy;
                 parlatoText.setText(res);
-                accuracyText.setText("Accuracy: "+ accuracy+"%");
+                accuracyText.setText(accuracy+"%");
             }
 
             @Override
@@ -139,20 +146,21 @@ public class LivelloActivity extends AppCompatActivity {
                     speechRecognizer.stopListening();
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    micButton.setImageResource(R.mipmap.mic_green);
-
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
                 return false;
             }
         });
 
-        homeButton.setOnTouchListener(new View.OnTouchListener() {
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Intent intent = new Intent(LivelloActivity.this,MainActivity.class);
-                startActivity(intent);
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(LivelloActivity.this, MainActivity.class);
+                intent.putExtra("livello",livello);
+                intent.putExtra("totAcc", totAcc);
+                setResult(RESULT_OK, intent);
+                finish();
+                //startActivity(intent);
             }
         });
 
@@ -164,18 +172,4 @@ public class LivelloActivity extends AppCompatActivity {
         speechRecognizer.destroy();
     }
 
-    private void checkPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == RecordAudioRequestCode && grantResults.length > 0 ){
-            if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
-        }
-    }
 }

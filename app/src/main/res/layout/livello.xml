@@ -66,7 +66,7 @@
         android:id="@+id/mic"
         android:layout_width="213dp"
         android:layout_height="116dp"
-        android:contentDescription="@string/pulsante_microfono"
+        android:contentDescription="pulsante microfono"
         app:srcCompat="@mipmap/mic_def" />
 
     <FrameLayout

@@ -1,11 +1,17 @@
 package com.example.texttospeech;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -64,18 +70,30 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i<NumLivelli; i++){
             int finalI = i;
-            chips[i].setOnTouchListener(new View.OnTouchListener() {
+            chips[i].setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    Intent intent = new Intent(MainActivity.this,
-                            LivelloActivity.class);
+                public void onClick(View v) {
+                    //Create Intent
+                    Intent intent = new Intent(MainActivity.this, LivelloActivity.class);
                     intent.putExtra("livello",finalI);
-                    startActivity(intent);
-                    return false;
+                    //startActivity(intent);
+                    startActivityForResult(intent, 1);
                 }
             });
         }
 
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("IL RISULTATO E STATO RITORNATO reqcode = "+requestCode+" result code = "+resultCode);
+        // Checking the result status
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            float totAcc = data.getFloatExtra("totAcc", -1);
+            System.out.println("STAMMI A SENTIRE, ALLORA LO STATO DELLA Accuracy = "+totAcc);
+
+        }
     }
 
     @Override
@@ -97,4 +115,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

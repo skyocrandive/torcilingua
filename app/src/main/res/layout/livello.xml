@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/goHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home"
@@ -62,12 +62,12 @@
         android:layout_width="match_parent"
         android:layout_height="20dp" />
 
-    <com.google.android.material.chip.Chip
+    <ImageView
         android:id="@+id/mic"
-        android:layout_width="157dp"
-        android:layout_height="139dp"
-        android:foreground="@mipmap/mic_black"
-        app:chipBackgroundColor="#FFFFFF" />
+        android:layout_width="213dp"
+        android:layout_height="116dp"
+        android:contentDescription="@string/pulsante_microfono"
+        app:srcCompat="@mipmap/mic_def" />
 
     <FrameLayout
         android:layout_width="wrap_content"

@@ -3,6 +3,9 @@ package com.example.texttospeech;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
@@ -11,7 +14,6 @@ import android.speech.SpeechRecognizer;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,16 +23,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.chip.Chip;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class LivelloActivity extends AppCompatActivity {
     public static final Integer RecordAudioRequestCode = 1;
     private SpeechRecognizer speechRecognizer;
-    private TextView editText;
-    private ImageView micButton;
+    private TextView parlatoText;
     private TextView sciogliText;
     private Button homeButton;
+    private ImageView micButton;
+    private Chip nextButton;
     private TextView accuracyText;
 
     String testoSciogli = "Trentatré Trentini entrarono a Trento tutti e trentatré trotterellando";
@@ -59,11 +64,13 @@ public class LivelloActivity extends AppCompatActivity {
             checkPermission();
         }
 
-        editText = findViewById(R.id.parlato);
+        parlatoText = findViewById(R.id.parlato);
         micButton = findViewById(R.id.mic);
-        homeButton = findViewById(R.id.nextBut);
-        accuracyText = findViewById(R.id.accuracy);
+        homeButton = findViewById(R.id.goHome);
+        nextButton = findViewById(R.id.nextBut);
+        accuracyText = findViewById(R.id.accuracyText);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+
 
         final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -78,8 +85,8 @@ public class LivelloActivity extends AppCompatActivity {
 
             @Override
             public void onBeginningOfSpeech() {
-                editText.setText("");
-                editText.setHint("Sto ascoltando...");
+                parlatoText.setText("");
+                parlatoText.setHint("Sto ascoltando...");
             }
 
             @Override
@@ -94,7 +101,7 @@ public class LivelloActivity extends AppCompatActivity {
 
             @Override
             public void onEndOfSpeech() {
-
+                micButton.setImageResource(R.mipmap.mic_def);
             }
 
             @Override
@@ -104,11 +111,12 @@ public class LivelloActivity extends AppCompatActivity {
 
             @Override
             public void onResults(Bundle bundle) {
-                micButton.setImageResource(R.drawable.ic_mic_black_off);
+
+                micButton.setImageResource(R.mipmap.mic_def);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 String res = data.get(0);
                 float accuracy = precisione(testoSciogli, res);
-                editText.setText(res);
+                parlatoText.setText(res);
                 accuracyText.setText("Accuracy: "+ accuracy+"%");
             }
 
@@ -131,7 +139,8 @@ public class LivelloActivity extends AppCompatActivity {
                     speechRecognizer.stopListening();
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    micButton.setImageResource(R.drawable.ic_mic_black_24dp);
+                    micButton.setImageResource(R.mipmap.mic_green);
+
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
                 return false;

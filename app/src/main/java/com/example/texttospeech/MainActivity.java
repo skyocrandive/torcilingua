@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                     completeTesti[livello].setVisibility(View.VISIBLE);
                 }
             }
-            //System.out.println("STAMMI A SENTIRE, ALLORA LO STATO DELLA Accuracy = "+totAcc);
         }
     }
 

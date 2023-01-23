@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,8 +45,11 @@ public class LivelloActivity extends AppCompatActivity {
     private Chip nextButton;
     private TextView accuracyText;
     private CircularProgressIndicator ratio;
+    private LinearProgressIndicator levelProg;
+    private int posizione = 0;
+    private int lunghezzaLivello = 0;
     private int totAcc = 0;
-
+    private int accuracy=0;
 
     String testoSciogli = "Trentatré Trentini entrarono a Trento tutti e trentatré trotterellando";
 
@@ -76,6 +80,8 @@ public class LivelloActivity extends AppCompatActivity {
         String[] scioglilinguas = getIntent().getStringArrayExtra("scioglilingua");
         List testi = new ArrayList(Arrays.asList(scioglilinguas));
         Collections.shuffle(testi);
+        posizione = 0;
+        lunghezzaLivello = testi.size();
 
         testoSciogli = (String) testi.get(0);
 
@@ -88,6 +94,7 @@ public class LivelloActivity extends AppCompatActivity {
         nextButton = findViewById(R.id.nextBut);
         accuracyText = findViewById(R.id.accuracyText);
         ratio = findViewById(R.id.accuracy);
+        levelProg = findViewById(R.id.levProg);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
 
@@ -135,8 +142,7 @@ public class LivelloActivity extends AppCompatActivity {
                 micButton.setImageResource(R.mipmap.mic_def);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 String res = data.get(0);
-                int accuracy = precisione(testoSciogli, res);
-                totAcc =accuracy;
+                accuracy = precisione(testoSciogli, res);
                 parlatoText.setText(res);
                 accuracyText.setText(accuracy+"%");
                 ratio.setProgress(accuracy);
@@ -168,9 +174,24 @@ public class LivelloActivity extends AppCompatActivity {
             }
         });
 
+        nextButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                posizione++;
+                totAcc =(accuracy+totAcc)/posizione;
+                levelProg.setProgress(100*posizione/lunghezzaLivello);
+                testoSciogli= (String) testi.get(posizione);
+                sciogliText.setText(testoSciogli);
+                parlatoText.setText("");
+                accuracyText.setText("");
+                ratio.setProgress(0);
+            }
+        });
+
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                totAcc = (accuracy+totAcc)/posizione;
                 Intent intent = new Intent(LivelloActivity.this, MainActivity.class);
                 intent.putExtra("livello",livello);
                 intent.putExtra("totAcc", totAcc);

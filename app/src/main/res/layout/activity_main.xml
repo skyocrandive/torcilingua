@@ -10,17 +10,28 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="#76D8AE"
-        android:freezesText="true"
-        android:gravity="center"
-        android:text="@string/torcilingua"
-        android:textColor="#000000"
-        android:textSize="34sp"
-        app:drawableStartCompat="@mipmap/torcilingua_logo" />
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#76D8AE"
+            android:freezesText="true"
+            android:gravity="center"
+            android:text="@string/torcilingua"
+            android:textColor="#000000"
+            android:textSize="34sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/application_logo"
+            app:srcCompat="@mipmap/torcilingua_logo" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameLv1"
@@ -46,9 +57,7 @@
             android:layout_height="72dp"
             android:gravity="bottom"
             android:paddingStart="60dp"
-            android:paddingLeft="60dp"
             android:paddingEnd="0dp"
-            android:paddingRight="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
             android:textStyle="bold"
@@ -60,9 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:paddingStart="0dp"
-            android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp"
             android:progress="0"
             app:indicatorColor="#073B3A"
             app:trackThickness="20dp" />
@@ -73,8 +80,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:gravity="center"
-            android:paddingLeft="0dp"
-            android:paddingRight="14dp"
             android:text="@string/_0"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
@@ -107,9 +112,7 @@
             android:layout_height="72dp"
             android:gravity="bottom"
             android:paddingStart="60dp"
-            android:paddingLeft="60dp"
             android:paddingEnd="0dp"
-            android:paddingRight="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
             android:textStyle="bold"
@@ -121,9 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:paddingStart="0dp"
-            android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp"
             app:indicatorColor="#073B3A"
             app:trackThickness="20dp" />
 
@@ -133,8 +134,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:gravity="center"
-            android:paddingLeft="0dp"
-            android:paddingRight="14dp"
             android:text="@string/_0"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
@@ -168,9 +167,7 @@
             android:layout_height="72dp"
             android:gravity="bottom"
             android:paddingStart="60dp"
-            android:paddingLeft="60dp"
             android:paddingEnd="0dp"
-            android:paddingRight="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
             android:textStyle="bold"
@@ -182,9 +179,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:paddingStart="0dp"
-            android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp"
             app:indicatorColor="#073B3A"
             app:trackThickness="20dp"/>
 
@@ -194,8 +189,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:gravity="center"
-            android:paddingLeft="0dp"
-            android:paddingRight="14dp"
             android:text="@string/_0"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
@@ -228,9 +221,7 @@
             android:layout_height="72dp"
             android:gravity="bottom"
             android:paddingStart="60dp"
-            android:paddingLeft="60dp"
             android:paddingEnd="0dp"
-            android:paddingRight="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
             android:textStyle="bold"
@@ -242,9 +233,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:paddingStart="0dp"
-            android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp"
             app:indicatorColor="#073B3A"
             app:trackThickness="20dp"/>
 
@@ -254,8 +243,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:gravity="center"
-            android:paddingLeft="0dp"
-            android:paddingRight="14dp"
             android:text="@string/_0"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
@@ -288,9 +275,7 @@
             android:layout_height="72dp"
             android:gravity="bottom"
             android:paddingStart="60dp"
-            android:paddingLeft="60dp"
             android:paddingEnd="0dp"
-            android:paddingRight="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
             android:textStyle="bold"
@@ -302,8 +287,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:gravity="center"
-            android:paddingLeft="0dp"
-            android:paddingRight="14dp"
             android:text="@string/_0"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
@@ -317,9 +300,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
             android:paddingStart="0dp"
-            android:paddingLeft="0dp"
             android:paddingEnd="10dp"
-            android:paddingRight="10dp"
             app:indicatorColor="#073B3A"
             app:trackThickness="20dp"/>
 

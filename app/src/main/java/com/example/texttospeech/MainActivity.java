@@ -13,9 +13,11 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -32,6 +34,8 @@ import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView[] completeTesti = new TextView[NumLivelli];
     private CircularProgressIndicator[] barProgressi = new CircularProgressIndicator[NumLivelli];
     private TextView[] percProgs = new TextView[NumLivelli];
+    private SharedPreferences sh;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -53,11 +59,30 @@ public class MainActivity extends AppCompatActivity {
             checkPermission();
         }
 
-        String jsonFileString = Utils.getJsonFromAssets(getApplicationContext(), "scioglilingua.json");
+        sh = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sh.edit();
 
+        //String progressoFile = null;
+        //List<Progresso> progressi =null;
+        //try {
+            //progressoFile = Utils.readProgress(getApplicationContext());
+
+            //Type listProgressoType = new TypeToken<List<Progresso>>() { }.getType();
+            //progressi = gson.fromJson(progressoFile, listProgressoType);
+
+        /*} catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("FILE NOT FOUND!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+        //
+        String jsonFileString = Utils.getJsonFromAssets(getApplicationContext(), "scioglilingua.json");
         Gson gson = new Gson();
         Type listLivelloType = new TypeToken<List<Livello>>() { }.getType();
-
         List<Livello> livelli = gson.fromJson(jsonFileString, listLivelloType);
 
         chips[0] = findViewById(R.id.lev1);
@@ -85,7 +110,19 @@ public class MainActivity extends AppCompatActivity {
         barProgressi[4] = findViewById(R.id.prog5);
         percProgs[4] = findViewById(R.id.progText5);
 
+
+
         for (int i = 0; i<NumLivelli; i++){
+            //ripristina progresso
+            int accuratezzaLivello = sh.getInt(Integer.toString(i), 0);
+
+            barProgressi[i].setProgress(accuratezzaLivello);
+            percProgs[i].setText(accuratezzaLivello+"%");
+            if(accuratezzaLivello==100){
+                completeTesti[i].setVisibility(View.VISIBLE);
+            }
+
+
             int finalI = i;
             chips[i].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,6 +148,11 @@ public class MainActivity extends AppCompatActivity {
             int totAcc = data.getIntExtra("totAcc", -1);
             int livello = data.getIntExtra("livello", -1);
             if(livello>=0 && totAcc>=0){
+                //save progress
+                editor.putInt(Integer.toString(livello), totAcc);
+                editor.apply();
+
+                //update indicators
                 barProgressi[livello].setProgress(totAcc);
                 percProgs[livello].setText(totAcc+"%");
                 if(totAcc==100){
@@ -118,6 +160,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+        //save progressi on json file
+        /*
+        List<Progresso> updatedProgressi = new ArrayList<>();
+        for (int i = 0; i<NumLivelli; i++) {
+            Progresso p = new Progresso(i, barProgressi[i].getProgress());
+            updatedProgressi.add(p);
+        }
+        Progresso[] progressiAgg = updatedProgressi.toArray(new Progresso[updatedProgressi.size()]);
+        Utils.writeProgress(getApplicationContext(), progressiAgg);
+        */
     }
 
     @Override

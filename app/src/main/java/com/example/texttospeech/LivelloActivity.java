@@ -44,6 +44,7 @@ public class LivelloActivity extends AppCompatActivity {
 
     int precisione(String testo, String parlato){
         testo = testo.replaceAll("\\p{Punct}","");
+        parlato = parlato.replaceAll("\\p{Punct}","");
         String[] paroleTesto = testo.split(" ");
         String[] paroleParlato = parlato.split(" ");
         int corrette = 0;

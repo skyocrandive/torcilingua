@@ -1,30 +1,17 @@
 package com.example.texttospeech;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
@@ -37,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class LivelloActivity extends AppCompatActivity {
-    public static final Integer RecordAudioRequestCode = 1;
+    //public static final Integer RecordAudioRequestCode = 1;
     private SpeechRecognizer speechRecognizer;
     private TextView parlatoText;
     private TextView sciogliText;
@@ -177,7 +164,7 @@ public class LivelloActivity extends AppCompatActivity {
 
         nextButton.setOnClickListener(v -> {
             if(posizione==lunghezzaLivello){
-                totAcc = (accuracy+totAcc)/lunghezzaLivello;
+                totAcc = (accuracy+totAcc)/(lunghezzaLivello+1);
                 Intent intent = new Intent(LivelloActivity.this, MainActivity.class);
                 intent.putExtra("livello",livello);
                 intent.putExtra("totAcc", totAcc);

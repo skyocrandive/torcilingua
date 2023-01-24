@@ -1,45 +1,29 @@
 package com.example.texttospeech;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.speech.RecognitionListener;
-import android.speech.RecognizerIntent;
-import android.speech.SpeechRecognizer;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     public static final Integer RecordAudioRequestCode = 1;
@@ -61,23 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
         sh = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sh.edit();
-
-        //String progressoFile = null;
-        //List<Progresso> progressi =null;
-        //try {
-            //progressoFile = Utils.readProgress(getApplicationContext());
-
-            //Type listProgressoType = new TypeToken<List<Progresso>>() { }.getType();
-            //progressi = gson.fromJson(progressoFile, listProgressoType);
-
-        /*} catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("FILE NOT FOUND!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
 
         //
         String jsonFileString = Utils.getJsonFromAssets(getApplicationContext(), "scioglilingua.json");
@@ -124,16 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
 
             int finalI = i;
-            chips[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Create Intent
-                    Intent intent = new Intent(MainActivity.this, LivelloActivity.class);
-                    intent.putExtra("livello",finalI);
-                    intent.putExtra("scioglilingua", livelli.get(finalI).getScioglilingua());
-                    //startActivity(intent);
-                    startActivityForResult(intent, 1);
-                }
+            chips[i].setOnClickListener(v -> {
+                //Create Intent
+                Intent intent = new Intent(MainActivity.this, LivelloActivity.class);
+                intent.putExtra("livello",finalI);
+                intent.putExtra("scioglilingua", livelli.get(finalI).getScioglilingua());
+                //startActivity(intent);
+                startActivityForResult(intent, 1);
             });
         }
 
@@ -160,17 +124,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
-        //save progressi on json file
-        /*
-        List<Progresso> updatedProgressi = new ArrayList<>();
-        for (int i = 0; i<NumLivelli; i++) {
-            Progresso p = new Progresso(i, barProgressi[i].getProgress());
-            updatedProgressi.add(p);
-        }
-        Progresso[] progressiAgg = updatedProgressi.toArray(new Progresso[updatedProgressi.size()]);
-        Utils.writeProgress(getApplicationContext(), progressiAgg);
-        */
     }
 
     @Override
@@ -179,9 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
-        }
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
     }
 
     @Override

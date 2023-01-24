@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 public class Utils {
 
@@ -29,45 +30,13 @@ public class Utils {
             is.read(buffer);
             is.close();
 
-            jsonString = new String(buffer, "UTF-8");
+            jsonString = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
 
         return jsonString;
-    }
-
-    static String readProgress(Context ctx) throws IOException {
-        String fileName = "progress.json";
-        String dirPath = ctx.getFilesDir().getAbsolutePath() + File.separator + fileName;
-        String jsonString;
-
-        InputStream progress = new FileInputStream(dirPath);
-
-        int size = progress.available();
-        byte[] buffer = new byte[size];
-        progress.read(buffer);
-        progress.close();
-
-        jsonString = new String(buffer, "UTF-8");
-
-
-
-        return jsonString;
-    }
-
-    static void writeProgress(Context ctx, Progresso[] progressiAgg ) {
-        String fileName = "progress.json";
-        String dirPath = ctx.getFilesDir().getAbsolutePath() + File.separator + fileName;
-
-        Gson gson = new Gson();
-        try {
-            gson.toJson(progressiAgg, new FileWriter(dirPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
 

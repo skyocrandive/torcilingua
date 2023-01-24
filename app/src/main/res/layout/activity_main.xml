@@ -281,6 +281,16 @@
             android:textStyle="bold"
             android:visibility="invisible" />
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/prog5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
+            app:indicatorColor="#073B3A"
+            app:trackThickness="20dp" />
+
         <TextView
             android:id="@+id/progText5"
             android:layout_width="wrap_content"
@@ -293,16 +303,6 @@
             android:textStyle="bold"
             android:paddingEnd="14dp"
             android:paddingStart="0dp" />
-
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/prog5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|end"
-            android:paddingStart="0dp"
-            android:paddingEnd="10dp"
-            app:indicatorColor="#073B3A"
-            app:trackThickness="20dp"/>
 
     </FrameLayout>
 

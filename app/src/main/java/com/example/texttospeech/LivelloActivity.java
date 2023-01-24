@@ -50,11 +50,13 @@ public class LivelloActivity extends AppCompatActivity {
     private int lunghezzaLivello = 0;
     private int totAcc = 0;
     private int accuracy=0;
+    private int livello=0;
 
     String testoSciogli = "Trentatré Trentini entrarono a Trento tutti e trentatré trotterellando";
 
 
     int precisione(String testo, String parlato){
+        testo = testo.replaceAll("\\p{Punct}","");
         String[] paroleTesto = testo.split(" ");
         String[] paroleParlato = parlato.split(" ");
         int corrette = 0;
@@ -75,13 +77,13 @@ public class LivelloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.livello);
 
-        int livello = getIntent().getIntExtra("livello", 1);
+        livello = getIntent().getIntExtra("livello", 1);
 
         String[] scioglilinguas = getIntent().getStringArrayExtra("scioglilingua");
         List testi = new ArrayList(Arrays.asList(scioglilinguas));
         Collections.shuffle(testi);
         posizione = 0;
-        lunghezzaLivello = testi.size();
+        lunghezzaLivello = testi.size()-1;
 
         testoSciogli = (String) testi.get(0);
 
@@ -177,21 +179,34 @@ public class LivelloActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                if(posizione==lunghezzaLivello){
+                    totAcc = (accuracy+totAcc)/lunghezzaLivello;
+                    Intent intent = new Intent(LivelloActivity.this, MainActivity.class);
+                    intent.putExtra("livello",livello);
+                    intent.putExtra("totAcc", totAcc);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                    return;
+                }
                 posizione++;
-                totAcc =(accuracy+totAcc)/posizione;
+                totAcc =accuracy+totAcc;
                 levelProg.setProgress(100*posizione/lunghezzaLivello);
                 testoSciogli= (String) testi.get(posizione);
                 sciogliText.setText(testoSciogli);
                 parlatoText.setText("");
                 accuracyText.setText("");
                 ratio.setProgress(0);
+                accuracy=0;
+                if(posizione==lunghezzaLivello){
+                    nextButton.setText("finisci");
+                }
             }
         });
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                totAcc = (accuracy+totAcc)/posizione;
+                totAcc = (accuracy+totAcc)/(lunghezzaLivello+1);
                 Intent intent = new Intent(LivelloActivity.this, MainActivity.class);
                 intent.putExtra("livello",livello);
                 intent.putExtra("totAcc", totAcc);

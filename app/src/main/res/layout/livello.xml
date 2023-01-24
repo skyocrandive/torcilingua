@@ -44,69 +44,64 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
     <TextView
         android:id="@+id/scioglilingua"
         android:layout_width="392dp"
-        android:layout_height="177dp"
+        android:layout_height="230dp"
         android:background="@drawable/rounded_corner"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <ImageView
-        android:id="@+id/mic"
-        android:layout_width="213dp"
-        android:layout_height="116dp"
-        android:contentDescription="@string/pulsante_microfono"
-        app:srcCompat="@mipmap/mic_def" />
-
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end">
+        android:layout_width="match_parent"
+        android:layout_height="122dp"
+        android:layout_gravity="center_vertical">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/accuracy"
-            android:layout_width="65dp"
-            android:layout_height="62dp"
-            android:layout_gravity="center|end"
-            android:progress="0"
-            app:indicatorColor="#5EB1BF"
-            app:trackThickness="20dp" />
-
-        <TextView
-            android:id="@+id/accuracyText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <ImageView
+            android:id="@+id/mic"
+            android:layout_width="213dp"
+            android:layout_height="116dp"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="#FEFEFE"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:contentDescription="@string/pulsante_microfono"
+            app:srcCompat="@mipmap/mic_def" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/accuracy"
+                android:layout_width="65dp"
+                android:layout_height="62dp"
+                android:layout_gravity="center|end"
+                android:progress="0"
+                app:indicatorColor="#5EB1BF"
+                app:trackThickness="20dp" />
+
+            <TextView
+                android:id="@+id/accuracyText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#FEFEFE"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </FrameLayout>
     </FrameLayout>
 
     <TextView
         android:id="@+id/parlato"
         android:layout_width="392dp"
-        android:layout_height="177dp"
+        android:layout_height="230dp"
         android:background="@drawable/rounded_corner"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/nextBut"

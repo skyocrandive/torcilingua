@@ -1,6 +1,7 @@
 package com.example.texttospeech;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
@@ -51,8 +52,7 @@ public class LivelloActivity extends AppCompatActivity {
     private int totAcc = 0;
     private int accuracy=0;
     private int livello=0;
-
-    String testoSciogli = "Trentatré Trentini entrarono a Trento tutti e trentatré trotterellando";
+    private String testoSciogli;
 
 
     int precisione(String testo, String parlato){
@@ -60,16 +60,18 @@ public class LivelloActivity extends AppCompatActivity {
         String[] paroleTesto = testo.split(" ");
         String[] paroleParlato = parlato.split(" ");
         int corrette = 0;
-        int i = 0;
-        for (i = 0; i< paroleTesto.length && i<paroleParlato.length; i++){
+        int lenghtTesto = paroleTesto.length;
+        int lenghtParlato = paroleParlato.length;
+        for (int i = 0; i< lenghtTesto && i<lenghtParlato; i++){
             if(paroleTesto[i].equalsIgnoreCase(paroleParlato[i])){
                 corrette++;
             }
         }
-        float dividendo = i < paroleTesto.length ? paroleTesto.length : paroleParlato.length;
-        return (int) (100*corrette/dividendo);
+        int dividendo = Math.max(lenghtTesto, lenghtParlato);
+        return 100*corrette/dividendo;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         System.out.println("ciao mondo!!!!");
@@ -80,12 +82,12 @@ public class LivelloActivity extends AppCompatActivity {
         livello = getIntent().getIntExtra("livello", 1);
 
         String[] scioglilinguas = getIntent().getStringArrayExtra("scioglilingua");
-        List testi = new ArrayList(Arrays.asList(scioglilinguas));
+        List<String> testi = new ArrayList<>(Arrays.asList(scioglilinguas));
         Collections.shuffle(testi);
         posizione = 0;
         lunghezzaLivello = testi.size()-1;
 
-        testoSciogli = (String) testi.get(0);
+        testoSciogli = testi.get(0);
 
         sciogliText = findViewById(R.id.scioglilingua);
         sciogliText.setText(testoSciogli);
@@ -163,57 +165,48 @@ public class LivelloActivity extends AppCompatActivity {
 
         });
 
-        micButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    speechRecognizer.stopListening();
-                }
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    speechRecognizer.startListening(speechRecognizerIntent);
-                }
-                return false;
+        micButton.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                speechRecognizer.stopListening();
             }
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                speechRecognizer.startListening(speechRecognizerIntent);
+            }
+            return false;
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if(posizione==lunghezzaLivello){
-                    totAcc = (accuracy+totAcc)/lunghezzaLivello;
-                    Intent intent = new Intent(LivelloActivity.this, MainActivity.class);
-                    intent.putExtra("livello",livello);
-                    intent.putExtra("totAcc", totAcc);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                    return;
-                }
-                posizione++;
-                totAcc =accuracy+totAcc;
-                levelProg.setProgress(100*posizione/lunghezzaLivello);
-                testoSciogli= (String) testi.get(posizione);
-                sciogliText.setText(testoSciogli);
-                parlatoText.setText("");
-                accuracyText.setText("");
-                ratio.setProgress(0);
-                accuracy=0;
-                if(posizione==lunghezzaLivello){
-                    nextButton.setText("finisci");
-                }
-            }
-        });
-
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                totAcc = (accuracy+totAcc)/(lunghezzaLivello+1);
+        nextButton.setOnClickListener(v -> {
+            if(posizione==lunghezzaLivello){
+                totAcc = (accuracy+totAcc)/lunghezzaLivello;
                 Intent intent = new Intent(LivelloActivity.this, MainActivity.class);
                 intent.putExtra("livello",livello);
                 intent.putExtra("totAcc", totAcc);
                 setResult(RESULT_OK, intent);
                 finish();
-                //startActivity(intent);
+                return;
             }
+            posizione++;
+            totAcc =accuracy+totAcc;
+            levelProg.setProgress(100*posizione/lunghezzaLivello);
+            testoSciogli= testi.get(posizione);
+            sciogliText.setText(testoSciogli);
+            parlatoText.setText("");
+            accuracyText.setText("");
+            ratio.setProgress(0);
+            accuracy=0;
+            if(posizione==lunghezzaLivello){
+                nextButton.setText("finisci");
+            }
+        });
+
+        homeButton.setOnClickListener(v -> {
+            totAcc = (accuracy+totAcc)/(lunghezzaLivello+1);
+            Intent intent = new Intent(LivelloActivity.this, MainActivity.class);
+            intent.putExtra("livello",livello);
+            intent.putExtra("totAcc", totAcc);
+            setResult(RESULT_OK, intent);
+            finish();
+            //startActivity(intent);
         });
 
     }

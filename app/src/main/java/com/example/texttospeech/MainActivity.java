@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i<NumLivelli; i++){
             //ripristina progresso
             int accuratezzaLivello = sh.getInt(Integer.toString(i), 0);
-
             barProgressi[i].setProgress(accuratezzaLivello);
             percProgs[i].setText(accuratezzaLivello+"%");
             if(accuratezzaLivello==100){

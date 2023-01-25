@@ -93,6 +93,7 @@ public class LivelloActivity extends AppCompatActivity {
         final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ITALY.toString()); //it sets language recognition to the language of the device
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
 
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
 
@@ -143,7 +144,9 @@ public class LivelloActivity extends AppCompatActivity {
 
             @Override
             public void onPartialResults(Bundle bundle) {
-
+                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                String res = data.get(0);
+                parlatoText.setText(res);
             }
 
             @Override
@@ -180,6 +183,7 @@ public class LivelloActivity extends AppCompatActivity {
             sciogliText.setText(testoSciogli);
             parlatoText.setText("");
             accuracyText.setText("");
+            parlatoText.setHint("");
             ratio.setProgress(0);
             accuracy=0;
             if(posizione==lunghezzaLivello){

@@ -60,6 +60,7 @@
             android:paddingEnd="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
+            android:textColor="#000000"
             android:textStyle="bold"
             android:visibility="invisible" />
 
@@ -115,6 +116,7 @@
             android:paddingEnd="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
+            android:textColor="#000000"
             android:textStyle="bold"
             android:visibility="invisible" />
 
@@ -170,6 +172,7 @@
             android:paddingEnd="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
+            android:textColor="#000000"
             android:textStyle="bold"
             android:visibility="invisible" />
 
@@ -224,6 +227,7 @@
             android:paddingEnd="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
+            android:textColor="#000000"
             android:textStyle="bold"
             android:visibility="invisible" />
 
@@ -278,6 +282,7 @@
             android:paddingEnd="0dp"
             android:text="@string/completato"
             android:textAllCaps="true"
+            android:textColor="#000000"
             android:textStyle="bold"
             android:visibility="invisible" />
 

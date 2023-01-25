@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
                 percProgs[livello].setText(totAcc+"%");
                 if(totAcc==100){
                     completeTesti[livello].setVisibility(View.VISIBLE);
+                }else{
+                    completeTesti[livello].setVisibility(View.INVISIBLE);
                 }
             }
         }

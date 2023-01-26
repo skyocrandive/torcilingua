@@ -10,7 +10,7 @@
     L'app che testa quanto bene sei in grado di pronunciare gli scioglilingua italiani
     <br/>
     <br/>
-    <a href="https://github.com/skyocrandive/torcilingua">View Demo</a>
+    <a href="https://github.com/skyocrandive/torcilingua/tree/master/demoImages">View Demo</a>
     .
     <a href="https://github.com/skyocrandive/torcilingua/issues">Report Bug</a>
     .
@@ -18,13 +18,17 @@
   </p>
 </p>
 
-![Contributors](https://img.shields.io/github/contributors/skyocrandive/torcilingua?color=dark-green) ![Forks](https://img.shields.io/github/forks/skyocrandive/torcilingua?style=social) ![Stargazers](https://img.shields.io/github/stars/skyocrandive/torcilingua?style=social) ![Issues](https://img.shields.io/github/issues/skyocrandive/torcilingua) 
+<div align="center">
+
+  ![Contributors](https://img.shields.io/github/contributors/skyocrandive/torcilingua?color=dark-green) ![Forks](https://img.shields.io/github/forks/skyocrandive/torcilingua?style=social) ![Stargazers](https://img.shields.io/github/stars/skyocrandive/torcilingua?style=social) ![Issues](https://img.shields.io/github/issues/skyocrandive/torcilingua) 
+
+</div>
 
 ## About The Project
 
 <p align="middle">
-  <img src="demo/MainActivity.jpg" width="30%" height="30%"/>
-  <img src="demo/LivelloActivity.jpg" width="30%" height="30%"/> 
+  <img src="demoImages/MainActivity.jpg" width="30%" height="30%"/>
+  <img src="demoImages/LivelloActivity.jpg" width="30%" height="30%"/> 
 </p>
 
 Mobile app for Android which offers some italian tongue-twisters to pronounce inside five different levels. Each level displays one tongue-twister at a time and has a speech-to-text command usable to write what the user said and to do an estimation of how close is the sentence pronounced by the user to the tongue-twister.
@@ -67,7 +71,7 @@ git clone https://github.com/skyocrandive/torcilingua.git
 ## Usage
 Demo:
 <p align="middle">
-  <img src="demo/usage-torcilingua.gif" width="30%" height="30%"/>
+  <img src="demoImages/usage-torcilingua.gif" width="30%" height="30%"/>
 </p>
 
 
